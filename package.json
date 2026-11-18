@@ -1,0 +1,23 @@
+{
+  "name": "hakam",
+  "version": "1.0.0",
+  "description": "Hakam - olympiad testing program",
+  "author": "Hakam",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable nsis --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "tj.hakam.app",
+    "productName": "Hakam",
+    "files": ["main.js", "icon.png", "app/**/*"],
+    "win": { "target": ["portable", "nsis"], "icon": "icon.png" },
+    "portable": { "artifactName": "Hakam-portable.exe" },
+    "nsis": { "artifactName": "Hakam-Setup.exe", "oneClick": false, "allowToChangeInstallationDirectory": true, "shortcutName": "Hakam" }
+  }
+}

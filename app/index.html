@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Ҳакам — барномаи олимпиада</title>
+<style>
+:root{--navy:#14213D;--navy2:#1E2F55;--gold:#E5A823;--gold2:#FFF3D6;--teal:#1F7A6E;--teal2:#E2F2EF;--red:#C2412D;--red2:#FBE5E1;--ink:#1B2233;--mut:#667089;--line:#E1E4EC;--bg:#F5F6FA;--card:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Segoe UI","Noto Sans",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px}
+button,input,select,textarea{font:inherit;color:inherit}
+#app{display:flex;height:100vh}
+#side{width:228px;flex:none;background:var(--navy);color:#fff;display:flex;flex-direction:column;padding:20px 14px}
+.logo{display:flex;align-items:center;gap:10px;padding:4px 8px 22px}
+.logo .mark{width:42px;height:42px;border-radius:12px;background:var(--gold);display:grid;place-items:center;font-size:24px}
+.logo b{font-size:22px;letter-spacing:.3px}.logo small{display:block;color:#AFC0E0;font-size:12px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav button{all:unset;cursor:pointer;display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:10px;color:#D5DEEF;font-size:15px}
+.nav button:hover{background:var(--navy2)}
+.nav button.on{background:var(--gold);color:var(--navy);font-weight:600}
+.side-foot{margin-top:auto;font-size:12px;color:#8FA2C7;padding:8px}
+#main{flex:1;overflow:auto;padding:26px 34px 60px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}
+.sub{color:var(--mut);margin:0 0 20px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.grow{flex:1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.btn{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font-weight:600;display:inline-flex;gap:8px;align-items:center;white-space:nowrap}
+.btn:hover{border-color:#C6CBDA}
+.btn.pri{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.btn.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.red{color:var(--red)}
+.btn.sm{padding:5px 10px;font-size:13px;border-radius:8px}
+.btn:disabled{opacity:.45;cursor:default}
+input[type=text],input[type=number],input[type=date],select,textarea{border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--navy)}
+textarea{width:100%;resize:vertical}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--mut);font-weight:600}
+label.f>*{color:var(--ink);font-weight:400;font-size:15px}
+.stat{padding:16px 18px}.stat b{font-size:28px;display:block}.stat span{color:var(--mut);font-size:13px}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;background:#EEF0F6;color:var(--navy)}
+.pill.gold{background:var(--gold2);color:#8A5A00}.pill.teal{background:var(--teal2);color:var(--teal)}.pill.red{background:var(--red2);color:var(--red)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:4px 0 18px}
+.tabs button{all:unset;cursor:pointer;padding:10px 14px;font-weight:600;color:var(--mut);border-bottom:3px solid transparent}
+.tabs button.on{color:var(--navy);border-color:var(--gold)}
+table.t{width:100%;border-collapse:collapse;background:#fff}
+.t th{font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--mut);text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);background:#FAFBFD}
+.t td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.t tr:hover td{background:#FAFBFD}
+.q{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border:0}
+.q .n{width:30px;height:30px;border-radius:8px;background:#EEF0F6;display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin-top:6px;font-size:14px;color:#3B4359}
+.opts .ok{color:var(--teal);font-weight:700}
+.empty{padding:40px;text-align:center;color:var(--mut)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.step i{font-style:normal;font-size:22px}.step b{display:block;margin:6px 0 2px}.step span{font-size:13px;color:var(--mut)}
+.hero{background:linear-gradient(120deg,var(--navy),#28417A);color:#fff;border-radius:18px;padding:26px 30px;display:flex;gap:24px;align-items:center;margin-bottom:18px}
+.hero h1{font-size:30px}.hero p{color:#C9D4EA;margin:6px 0 16px;max-width:620px}
+.medal{font-size:64px}
+#modal{position:fixed;inset:0;background:rgba(15,22,40,.5);display:flex;align-items:center;justify-content:center;z-index:50}
+#modal.hidden{display:none}
+.mbox{background:#fff;border-radius:16px;padding:22px;width:min(760px,94vw);max-height:92vh;overflow:auto}
+.mbox.wide{width:min(1280px,97vw)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:10px;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.drop{border:2px dashed #C6CBDA;border-radius:14px;padding:26px;text-align:center;background:#fff;cursor:pointer}
+.drop.over{border-color:var(--gold);background:var(--gold2)}
+.scanrow{display:flex;gap:12px;align-items:center;padding:10px;border-bottom:1px solid var(--line)}
+.scanrow img{width:46px;height:64px;object-fit:cover;border:1px solid var(--line);border-radius:4px}
+.ans{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 16px}
+.arow{display:flex;align-items:center;gap:6px;padding:2px 4px;border-radius:6px}
+.arow.flag{background:#FFF4D6}
+.arow .qn{width:26px;text-align:right;font-weight:700;font-size:13px;color:var(--mut)}
+.ab{all:unset;cursor:pointer;width:26px;height:26px;border-radius:50%;border:1.5px solid #9AA2B6;display:grid;place-items:center;font-size:12px;font-weight:700;color:#77809A}
+.ab.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.ab.ok{box-shadow:0 0 0 2px var(--teal)}
+.ab.on.bad{background:var(--red);border-color:var(--red)}
+.ab.on.good{background:var(--teal);border-color:var(--teal)}
+.prev{background:#E9ECF3;border-radius:12px;padding:18px;overflow:auto;max-height:640px}
+.prev .pg{transform-origin:top left;box-shadow:0 4px 16px rgba(0,0,0,.15);background:#fff}
+.bar{height:8px;border-radius:9px;background:#EEF0F6;overflow:hidden}.bar i{display:block;height:100%;background:var(--teal)}
+.place{font-weight:800;font-size:15px}
+.p1{color:#B8860B}.p2{color:#7A8494}.p3{color:#A0522D}
+.muted{color:var(--mut)}.small{font-size:13px}
+.hidden{display:none!important}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px;cursor:pointer}
+
+/* ===== Print pages (shared with on-screen preview) ===== */
+#print{display:none}
+.pg{width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;color:#000;font-family:"Segoe UI","Noto Sans",Arial,sans-serif}
+.pg.sheet .a{position:absolute}
+.mk{position:absolute;width:0;height:0;border:4mm solid #000}
+.cc{position:absolute;width:0;height:0;border:2.25mm solid #000}
+.cc0{position:absolute;width:4.5mm;height:4.5mm;border:0.2mm dotted #bbb}
+.bb{position:absolute;width:5.2mm;height:5.2mm;border:0.32mm solid #333;border-radius:50%;font-size:2.7mm;color:#a6a6a6;display:flex;align-items:center;justify-content:center;font-weight:600;line-height:1}
+.qno{position:absolute;width:7mm;text-align:right;font-size:3.4mm;font-weight:700;line-height:5.2mm}
+.sh-title{font-size:6mm;font-weight:800;letter-spacing:.6mm;text-align:center;line-height:8mm}
+.sh-info{border:0.3mm solid #999;border-radius:2mm;font-size:3.4mm;padding:2mm 3mm}
+.sh-info table{width:100%;border-collapse:collapse}.sh-info td{padding:0.6mm 0;vertical-align:top}
+.sh-info .lab{color:#555;width:30mm}
+.bigv{font-size:9mm;font-weight:800;text-align:center;line-height:9mm}
+.book{width:210mm;min-height:297mm;padding:14mm 16mm;background:#fff;color:#000;font-family:"Segoe UI","Noto Sans",Arial,sans-serif;font-size:3.7mm}
+.book .hd{border-bottom:0.5mm solid #000;padding-bottom:3mm;margin-bottom:4mm;display:flex;justify-content:space-between;gap:6mm}
+.book .hd b{font-size:5mm}
+.book .bq{break-inside:avoid;margin:0 0 4mm}
+.book .bq .tx{font-weight:600}
+.book .bq img{max-width:80mm;max-height:55mm;display:block;margin:2mm 0}
+.book .bo{display:grid;grid-template-columns:1fr 1fr;gap:1mm 8mm;margin:1.5mm 0 0 6mm}
+.doc{width:210mm;min-height:297mm;padding:16mm 16mm;background:#fff;color:#000;font-family:"Segoe UI","Noto Sans",Arial,sans-serif;font-size:3.6mm}
+.doc table{width:100%;border-collapse:collapse}.doc th,.doc td{border:0.25mm solid #444;padding:1.4mm 2mm;text-align:left}
+.doc th{background:#eee}
+.dip{width:210mm;height:297mm;position:relative;background:#fff;color:#14213D;font-family:"Segoe UI","Noto Sans",Arial,sans-serif;overflow:hidden}
+.dip .fr{position:absolute;inset:10mm;border:2.5mm solid #14213D}.dip .fr2{position:absolute;inset:15mm;border:0.8mm solid #E5A823}
+.dip .in{position:absolute;inset:26mm 24mm;text-align:center;display:flex;flex-direction:column;align-items:center}
+.pb{break-after:page}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff}
+  #app,#modal,.toast{display:none!important}
+  #print{display:block}
+  .pg,.book,.doc,.dip{break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page bookp{size:A4;margin:13mm 15mm}
+  .book,.doc{page:bookp;padding:0;width:auto;min-height:0}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <div class="logo"><div class="mark">⚖️</div><div><b>Ҳакам</b><small>барномаи олимпиада</small></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-foot">Бе интернет кор мекунад.<br>Маълумот дар ҳамин компютер.</div>
+  </aside>
+  <main id="main"></main>
+</div>
+<div id="modal" class="hidden"></div>
+<div id="print"></div>
+<input type="file" id="fileIn" class="hidden">
+<script src="app.js"></script>
+</body>
+</html>
